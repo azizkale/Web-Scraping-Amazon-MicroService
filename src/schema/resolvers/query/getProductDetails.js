@@ -5,6 +5,7 @@ const getProductDetails = async (_, { url }) => {
   const response = await Axios.get(url);
   const $ = await cheerio.load(response.data);
 
+  // Product Color==========================
   let colorlist = [];
   $("#twister")
     .find($("#variation_color_name > ul > li"))
@@ -16,6 +17,8 @@ const getProductDetails = async (_, { url }) => {
     $("#variation_color_name").find($("span.selection")).text().trim()
   );
 
+  // Product Size ==========================
+
   sizelist = [];
   $("#twister > #variation_size_name")
     .find($("select > option"))
@@ -26,10 +29,17 @@ const getProductDetails = async (_, { url }) => {
     $("#twister > #variation_size_name").find($("span.selection")).text().trim()
   );
 
+  // Product Description==========================
+
   descriptionlist = "";
   $("#feature-bullets > ul > li > span").map((i, el) => {
     descriptionlist += $(el).text().trim() + ",";
   });
+
+  // Product Infos==========================
+  let infolist = [];
+
+  // Product ==========================
 
   let product = {
     link: url,
@@ -40,6 +50,7 @@ const getProductDetails = async (_, { url }) => {
     color: colorlist,
     size: sizelist,
     description: [descriptionlist, $("#productDescription > p").text().trim()],
+    info: infolist,
   };
 
   return product;
