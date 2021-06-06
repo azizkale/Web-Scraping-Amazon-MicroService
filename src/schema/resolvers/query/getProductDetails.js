@@ -1,6 +1,5 @@
 const Axios = require("axios");
 const cheerio = require("cheerio");
-const Product = require("../../../oop-models/Product");
 
 const getProductDetails = async (_, { url }) => {
   const response = await Axios.get(url);
