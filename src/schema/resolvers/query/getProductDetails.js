@@ -39,6 +39,21 @@ const getProductDetails = async (_, { url }) => {
   // Product Infos==========================
   let infolist = [];
 
+  $("#detailBullets_feature_div > ul > li > span").map((i, el) => {
+    let obj = {};
+    obj["subInfoTitle"] = $(el)
+      .find($(":nth-child(1)"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+
+    obj["subInfo"] = $(el)
+      .find($(":nth-child(2)"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+
+    infolist.push(obj);
+  });
+
   // Product ==========================
 
   let product = {
