@@ -70,6 +70,22 @@ const getProductDetails = async (_, { url }) => {
     technicaldetails.push(obj);
   });
 
+  // Additional Info==========================
+  let additionalinfo = [];
+  $("#productDetails_detailBullets_sections1 > tbody > tr").map((i, el) => {
+    let obj = {};
+    obj["subInfoTitle"] = $(el)
+      .find($("th"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+
+    obj["subInfo"] = $(el)
+      .find($("td"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+    additionalinfo.push(obj);
+  });
+
   // Product ==========================
 
   let product = {
@@ -83,6 +99,7 @@ const getProductDetails = async (_, { url }) => {
     description: [descriptionlist, $("#productDescription > p").text().trim()],
     info: infolist,
     technicalDetails: technicaldetails,
+    additionalInfo: additionalinfo,
   };
 
   return product;

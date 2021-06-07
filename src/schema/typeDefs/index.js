@@ -10,6 +10,7 @@ const typeDefs = `
     description: [String]
     info: [ProductSubInfos]
     technicalDetails: [ProductSubInfos]
+    additionalInfo: [ProductSubInfos]
   }
 
   type ProductSubInfos {
