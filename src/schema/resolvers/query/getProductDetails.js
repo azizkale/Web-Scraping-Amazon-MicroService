@@ -54,6 +54,22 @@ const getProductDetails = async (_, { url }) => {
     infolist.push(obj);
   });
 
+  // Technical Details==========================
+  let technicaldetails = [];
+  $("#productDetails_techSpec_section_1 > tbody > tr").map((i, el) => {
+    let obj = {};
+    obj["subInfoTitle"] = $(el)
+      .find($("th"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+
+    obj["subInfo"] = $(el)
+      .find($("td"))
+      .text()
+      .replace(/[\n\t\r]/g, "");
+    technicaldetails.push(obj);
+  });
+
   // Product ==========================
 
   let product = {
@@ -66,6 +82,7 @@ const getProductDetails = async (_, { url }) => {
     size: sizelist,
     description: [descriptionlist, $("#productDescription > p").text().trim()],
     info: infolist,
+    technicalDetails: technicaldetails,
   };
 
   return product;
