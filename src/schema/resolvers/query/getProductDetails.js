@@ -31,10 +31,12 @@ const getProductDetails = async (_, { url }) => {
 
   // Product Description==========================
 
-  descriptionlist = "";
+  let descriptionlist = "";
   $("#feature-bullets > ul > li > span").map((i, el) => {
     descriptionlist += $(el).text().trim() + ",";
   });
+
+  descriptionlist += $("#productDescription > p").text().trim();
 
   // Product Infos==========================
   let infolist = [];
@@ -96,7 +98,7 @@ const getProductDetails = async (_, { url }) => {
     companyname: $("a#bylineInfo").text(),
     color: colorlist,
     size: sizelist,
-    description: [descriptionlist, $("#productDescription > p").text().trim()],
+    description: [descriptionlist],
     info: infolist,
     technicalDetails: technicaldetails,
     additionalInfo: additionalinfo,
