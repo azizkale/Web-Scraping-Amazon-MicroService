@@ -5,6 +5,10 @@ const getProductDetails = async (_, { url }) => {
   const response = await Axios.get(url);
   const $ = await cheerio.load(response.data);
 
+  return getProduct($, url);
+};
+
+let getProduct = ($, url) => {
   // Product Color==========================
   let colorlist = [];
   $("#twister")
@@ -103,7 +107,6 @@ const getProductDetails = async (_, { url }) => {
     technicalDetails: technicaldetails,
     additionalInfo: additionalinfo,
   };
-
   return product;
 };
 
