@@ -11,6 +11,7 @@ const typeDefs = `
     info: [ProductSubInfos]
     technicalDetails: [ProductSubInfos]
     additionalInfo: [ProductSubInfos]
+    seller: String
   }
 
   type ProductSubInfos {

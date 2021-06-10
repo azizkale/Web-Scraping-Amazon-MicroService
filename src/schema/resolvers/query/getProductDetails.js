@@ -91,6 +91,13 @@ let getProduct = ($, url) => {
       .replace(/[\n\t\r]/g, "");
     additionalinfo.push(obj);
   });
+  // Seller==========================
+
+  let seller = $(
+    "#tabular-buybox > table > tbody > tr:nth-child(2) > td:nth-child(2)"
+  )
+    .text()
+    .trim();
 
   // Product ==========================
 
@@ -106,6 +113,7 @@ let getProduct = ($, url) => {
     info: infolist,
     technicalDetails: technicaldetails,
     additionalInfo: additionalinfo,
+    seller: seller,
   };
   return product;
 };
