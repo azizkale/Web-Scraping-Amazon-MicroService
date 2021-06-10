@@ -12,11 +12,17 @@ const typeDefs = `
     technicalDetails: [ProductSubInfos]
     additionalInfo: [ProductSubInfos]
     seller: String
+    asin: ASIN
   }
 
   type ProductSubInfos {
     subInfoTitle: String
     subInfo: String
+  }
+
+  type ASIN {
+    asinColor: [String]
+    asinSize: [String]
   }
 
   type Query {   

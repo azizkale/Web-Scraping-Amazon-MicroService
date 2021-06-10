@@ -9,6 +9,32 @@ const getProductDetails = async (_, { url }) => {
 };
 
 let getProduct = ($, url) => {
+  // ASIN-Color======================
+  let asincolor = [];
+  $("#twister")
+    .find($("#variation_color_name > ul > li"))
+    .map(function (i, el) {
+      asincolor.push($(el).attr("data-defaultasin"));
+    });
+  // ASIN-size======================
+  let asinsize = [];
+  $("#twister > #variation_size_name")
+    .find($("select > option"))
+    .map((i, el) => {
+      asinsize.push($(el).attr("value"));
+    });
+
+  $("#twister > #variation_size_name > ul > li").map((i, el) => {
+    if ($(el).attr("data-defaultasin") != "") {
+      asinsize.push($(el).attr("data-defaultasin"));
+    } else {
+      let asin = $(el)
+        .attr("data-dp-url")
+        .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+      asinsize.push(asin);
+    }
+  });
+
   // Product Color==========================
   let colorlist = [];
   $("#twister")
@@ -27,8 +53,15 @@ let getProduct = ($, url) => {
   $("#twister > #variation_size_name")
     .find($("select > option"))
     .map((i, el) => {
-      return sizelist.push($(el).text().trim());
+      sizelist.push($(el).text().trim());
     });
+
+  $("#twister > #variation_size_name > ul > li")
+    .find($("p:nth-child(1)"))
+    .map((i, el) => {
+      sizelist.push($(el).text().trim());
+    });
+
   sizelist.push(
     $("#twister > #variation_size_name").find($("span.selection")).text().trim()
   );
@@ -114,6 +147,10 @@ let getProduct = ($, url) => {
     technicalDetails: technicaldetails,
     additionalInfo: additionalinfo,
     seller: seller,
+    asin: {
+      asinColor: asincolor,
+      asinSize: asinsize,
+    },
   };
   return product;
 };
