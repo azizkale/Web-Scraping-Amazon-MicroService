@@ -21,7 +21,12 @@ let getProduct = ($, url) => {
   $("#twister > #variation_size_name")
     .find($("select > option"))
     .map((i, el) => {
-      asinsize.push($(el).attr("value"));
+      if ($(el).attr("value") != "-1") {
+        let asin = $(el)
+          .attr("value")
+          .slice(Math.max($(el).attr("value").length - 10, 0));
+        asinsize.push(asin);
+      }
     });
 
   $("#twister > #variation_size_name > ul > li").map((i, el) => {
