@@ -1,6 +1,5 @@
 const Axios = require("axios");
 const cheerio = require("cheerio");
-const { concat } = require("../../typeDefs");
 
 const getLinksWithAsin = async (_, { url }) => {
   const response = await Axios.get(url);
@@ -8,7 +7,10 @@ const getLinksWithAsin = async (_, { url }) => {
 
   // console.log(url.split("/"));
   // console.log(url.split("/").join("/"));
+  return getlinkswithasin(url, $);
+};
 
+const getlinkswithasin = (url, $) => {
   // ASIN-Color======================
   let asincolor = [];
   $("#twister")
