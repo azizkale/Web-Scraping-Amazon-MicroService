@@ -25,8 +25,15 @@ const typeDefs = `
     asinSize: [String]
   }
 
+  type VariationLinks{
+    variationsLinksOfProduct:[String]
+    asinColor: [String]
+    asinSize: [String]
+  }
+
   type Query {   
     getProductDetails(url: String): Product
+    getLinksWithAsin(url: String):VariationLinks
   }
 `;
 
