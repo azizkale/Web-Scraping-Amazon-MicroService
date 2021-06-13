@@ -5,8 +5,6 @@ const getLinksWithAsin = async (_, { url }) => {
   const response = await Axios.get(url);
   const $ = await cheerio.load(response.data);
 
-  // console.log(url.split("/"));
-  // console.log(url.split("/").join("/"));
   return getlinkswithasin(url, $);
 };
 
@@ -27,6 +25,7 @@ const getlinkswithasin = (url, $) => {
         let asin = $(el)
           .attr("value")
           .slice(Math.max($(el).attr("value").length - 10, 0));
+        console.log("asinsize no: " + i + "  asinsize: " + asin);
         asinsize.push(asin);
       }
     });
@@ -35,35 +34,35 @@ const getlinkswithasin = (url, $) => {
     if ($(el).attr("data-defaultasin") != "") {
       asinsize.push($(el).attr("data-defaultasin"));
     } else {
-      let asin = $(el)
-        .attr("data-dp-url")
-        .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+      // let asin = $(el)
+      //   .attr("data-dp-url")
+      //   .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+      let asin = $(el).attr("data-dp-url").split("/")[2];
       asinsize.push(asin);
     }
   });
 
   // divides the url to an array
   let arrOfUrl = url.split("/");
+
   // the array contains product-variations links
   let variationslinksofproduct = [];
 
   // creates links of product-variations by using ASINs
   asincolor.map((asin) => {
-    for (let i = 0; i < asin.length; i++) {
-      arrOfUrl[5][i] = asin[i];
-    }
-    // arrOfUrl[5] = asin;
+    arrOfUrl[5] = asin;
+
+    // arrOfUrl[5] => arrOfUrl[5]  dizisindeki asin değeri;
     variationslinksofproduct.push(arrOfUrl.join("/") + "&psc=1");
   });
 
   asinsize.map((asin) => {
-    for (let i = 0; i < asin.length; i++) {
-      arrOfUrl[5][i] = asin[i];
-    }
-    // arrOfUrl[5] = asin;
+    arrOfUrl[5] = asin; //
+
+    // arrOfUrl[5] => arrOfUrl[5]  dizisindeki asin değeri;
     variationslinksofproduct.push(arrOfUrl.join("/") + "&psc=1");
   });
-  console.log(url.split("/"));
+  // console.log(url.split("/"));
   console.log(variationslinksofproduct);
   return {
     asinColor: asincolor,

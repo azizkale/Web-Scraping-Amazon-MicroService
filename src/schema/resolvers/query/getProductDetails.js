@@ -33,9 +33,10 @@ let getProduct = ($, url) => {
     if ($(el).attr("data-defaultasin") != "") {
       asinsize.push($(el).attr("data-defaultasin"));
     } else {
-      let asin = $(el)
-        .attr("data-dp-url")
-        .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+      // let asin = $(el)
+      //   .attr("data-dp-url")
+      //   .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+      let asin = $(el).attr("data-dp-url").split("/")[2];
       asinsize.push(asin);
     }
   });
