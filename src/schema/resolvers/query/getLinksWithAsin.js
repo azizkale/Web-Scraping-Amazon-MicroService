@@ -65,6 +65,7 @@ const getlinkswithasin = (url, $) => {
   // console.log(url.split("/"));
   console.log(variationslinksofproduct);
   return {
+    productUrl: url,
     asinColor: asincolor,
     asinSize: asinsize,
     variationsLinksOfProduct: variationslinksofproduct,

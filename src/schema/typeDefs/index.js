@@ -26,6 +26,7 @@ const typeDefs = `
   }
 
   type VariationLinks{
+    productUrl: String
     variationsLinksOfProduct:[String]
     asinColor: [String]
     asinSize: [String]
