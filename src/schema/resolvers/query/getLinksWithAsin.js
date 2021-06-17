@@ -62,8 +62,14 @@ const getlinkswithasin = (url, $) => {
     // arrOfUrl[5] => arrOfUrl[5]  dizisindeki asin değeri;
     variationslinksofproduct.push(arrOfUrl.join("/") + "&psc=1");
   });
-  // console.log(url.split("/"));
+
+  // if product has no variation then this adds the url as a variation link
+  if (variationslinksofproduct.length == 0) {
+    variationslinksofproduct.push(url);
+  }
+
   console.log(variationslinksofproduct);
+
   return {
     productUrl: url,
     asinColor: asincolor,
