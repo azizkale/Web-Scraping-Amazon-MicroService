@@ -22,7 +22,7 @@ const typeDefs = `
     availability: String
     companyname: String
     color: String
-    size: [String]
+    size: String
     description: [String]
     info: [ProductSubInfos]
     technicalDetails: [ProductSubInfos]

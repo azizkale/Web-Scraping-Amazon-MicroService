@@ -17,22 +17,20 @@ let getProduct = ($, url) => {
 
   // Product Size ==========================
 
-  sizelist = [];
-  $("#twister > #variation_size_name")
-    .find($("select > option"))
-    .map((i, el) => {
-      sizelist.push($(el).text().trim());
-    });
+  let psize = $("#twister > #variation_size_name")
+    .find($("select > option.dropdownSelect"))
+    .text()
+    .trim();
 
-  $("#twister > #variation_size_name > ul > li")
-    .find($("p:nth-child(1)"))
-    .map((i, el) => {
-      sizelist.push($(el).text().trim());
-    });
+  //   $("#twister > #variation_size_name > ul > li")
+  //     .find($("p:nth-child(1)"))
+  //     .map((i, el) => {
+  //       sizelist.push($(el).text().trim());
+  //     });
 
-  sizelist.push(
-    $("#twister > #variation_size_name").find($("span.selection")).text().trim()
-  );
+  //   sizelist.push(
+  //     $("#twister > #variation_size_name").find($("span.selection")).text().trim()
+  //   );
 
   // Product Description==========================
 
@@ -109,7 +107,7 @@ let getProduct = ($, url) => {
     availability: $("#availability > span").text().trim(),
     companyname: $("a#bylineInfo").text(),
     color: pcolor,
-    size: sizelist,
+    size: psize,
     description: [descriptionlist],
     info: infolist,
     technicalDetails: technicaldetails,
