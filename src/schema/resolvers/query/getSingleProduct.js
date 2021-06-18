@@ -1,7 +1,7 @@
 const Axios = require("axios");
 const cheerio = require("cheerio");
 
-const getProductDetails = async (_, { url }) => {
+const getSingleProduct = async (_, { url }) => {
   const response = await Axios.get(url);
   const $ = await cheerio.load(response.data);
 
@@ -100,13 +100,14 @@ let getProduct = ($, url) => {
 
   // ASIN =============================
   let ASIN =
-    $("#twister")
-      .find($("#variation_color_name > ul > li.swatchSelect"))
-      .attr("data-defaultasin") ||
-    $("#twister > #variation_size_name")
-      .find($("select > option"))
-      .attr("value")
-      .slice(Math.max($(el).attr("value").length - 10, 0));
+    // $("#twister")
+    //   .find($("#variation_color_name > ul > li.swatchSelect"))
+    //   .attr("data-defaultasin") ||
+    // $("#twister > #variation_size_name")
+    //   .find($("select > option"))
+    //   .attr("value")
+    //   .slice(Math.max($(el).attr("value").length - 10, 0)) ||
+    $("#averageCustomerReviews").attr("data-asin");
 
   //   $("#twister > #variation_size_name > ul > li").map((i, el) => {
   //     if ($(el).attr("data-defaultasin") != "") {
@@ -119,6 +120,14 @@ let getProduct = ($, url) => {
   //       asinsize.push(asin);
   //     }
   //   });
+
+  // Category =========================
+  let pcategory = $(
+    "#wayfinding-breadcrumbs_feature_div > ul > li:last-child> span > a"
+  )
+    .text()
+    .trim();
+
   // Product ==========================
 
   let product = {
@@ -135,8 +144,9 @@ let getProduct = ($, url) => {
     technicalDetails: technicaldetails,
     additionalInfo: additionalinfo,
     seller: seller,
+    category: pcategory,
   };
   return product;
 };
 
-module.exports = getProductDetails;
+module.exports = getSingleProduct;
