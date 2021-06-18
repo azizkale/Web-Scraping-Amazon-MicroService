@@ -98,9 +98,31 @@ let getProduct = ($, url) => {
     .text()
     .trim();
 
+  // ASIN =============================
+  let ASIN =
+    $("#twister")
+      .find($("#variation_color_name > ul > li.swatchSelect"))
+      .attr("data-defaultasin") ||
+    $("#twister > #variation_size_name")
+      .find($("select > option"))
+      .attr("value")
+      .slice(Math.max($(el).attr("value").length - 10, 0));
+
+  //   $("#twister > #variation_size_name > ul > li").map((i, el) => {
+  //     if ($(el).attr("data-defaultasin") != "") {
+  //       asinsize.push($(el).attr("data-defaultasin"));
+  //     } else {
+  //       // let asin = $(el)
+  //       //   .attr("data-dp-url")
+  //       //   .slice(Math.max($(el).attr("data-dp-url").length - 10, 0));
+  //       let asin = $(el).attr("data-dp-url").split("/")[2];
+  //       asinsize.push(asin);
+  //     }
+  //   });
   // Product ==========================
 
   let product = {
+    asin: ASIN,
     link: url,
     title: $("#productTitle").text().trim(),
     price: $("#priceblock_ourprice").text(),
