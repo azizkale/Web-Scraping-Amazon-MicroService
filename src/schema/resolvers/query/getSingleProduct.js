@@ -107,7 +107,8 @@ let getProduct = ($, url) => {
     //   .find($("select > option"))
     //   .attr("value")
     //   .slice(Math.max($(el).attr("value").length - 10, 0)) ||
-    $("#averageCustomerReviews").attr("data-asin");
+    $("#averageCustomerReviews").attr("data-asin") ||
+    $("input#ASIN").attr("value");
 
   //   $("#twister > #variation_size_name > ul > li").map((i, el) => {
   //     if ($(el).attr("data-defaultasin") != "") {
@@ -128,6 +129,9 @@ let getProduct = ($, url) => {
     .text()
     .trim();
 
+  // imagelink=======================
+
+  let pimagelink = $("#main-image-container img").attr("src");
   // Product ==========================
 
   let product = {
@@ -145,6 +149,7 @@ let getProduct = ($, url) => {
     additionalInfo: additionalinfo,
     seller: seller,
     category: pcategory,
+    imagelink: pimagelink,
   };
   return product;
 };

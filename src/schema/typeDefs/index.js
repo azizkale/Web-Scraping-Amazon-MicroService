@@ -15,6 +15,7 @@ const typeDefs = `
     seller: String
     asin: String
     category: String
+    imagelink: String
   }
 
   type ProductSubInfos {
