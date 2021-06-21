@@ -103,13 +103,18 @@ let getProduct = ($, url) => {
   // imagelink=======================
 
   let pimagelink = $("#main-image-container img").attr("src");
+
+  //Price====================
+
+  let pprice = $("#priceblock_ourprice").text().slice(0, -3);
+
   // Product ==========================
 
   let product = {
     asin: ASIN,
     link: url,
     title: $("#productTitle").text().trim(),
-    price: $("#priceblock_ourprice").text(),
+    price: +parseFloat(pprice.replace(/,/, ".")).toFixed(2),
     availability: $("#availability > span").text().trim(),
     companyname: $("a#bylineInfo").text(),
     color: pcolor,
